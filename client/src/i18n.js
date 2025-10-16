@@ -24,7 +24,13 @@ const resources = {
       },
       contact: {
         title: 'تماس با ما',
-        description: 'برای ارتباط با ما از طریق فرم زیر اقدام کنید.'
+        description: 'برای ارتباط با ما از طریق فرم زیر اقدام کنید.',
+        form: {
+          name: 'نام',
+          email: 'ایمیل',
+          message: 'پیام',
+          submit: 'ارسال پیام'
+        }
       }
     }
   },
@@ -50,7 +56,13 @@ const resources = {
       },
       contact: {
         title: 'اړیکه',
-        description: 'د موږ سره د اړیکې لپاره لاندې فورمه ډک کړئ.'
+        description: 'د موږ سره د اړیکې لپاره لاندې فورمه ډک کړئ.',
+        form: {
+          name: 'نوم',
+          email: 'ایمیل',
+          message: 'پیغام',
+          submit: 'استول پیغام'
+        }
       }
     }
   },
@@ -76,7 +88,13 @@ const resources = {
       },
       contact: {
         title: 'Contact Us',
-        description: 'To get in touch with us, please fill out the form below.'
+        description: 'To get in touch with us, please fill out the form below.',
+        form: {
+          name: 'Name',
+          email: 'Email',
+          message: 'Message',
+          submit: 'Send Message'
+        }
       }
     }
   }
@@ -86,7 +104,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'fa',
+    lng: 'fa', // زبان پیش‌فرض: دری
     fallbackLng: 'fa',
     interpolation: {
       escapeValue: false
