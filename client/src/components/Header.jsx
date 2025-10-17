@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { 
   FaBars, 
   FaTimes, 
@@ -18,135 +18,127 @@ import {
 
 function Header() {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHiddenContentOpen, setIsHiddenContentOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('');
 
-  // زبان‌ها با نام‌های نمایشی و پرچم
+  // Navigation items
+  const navItems = [
+    { path: '/', icon: <FaHome />, label: t('nav.home') },
+    { path: '/portfolio', icon: <FaProjectDiagram />, label: t('nav.portfolio') },
+    { path: '/services', icon: <FaInfoCircle />, label: t('nav.services') },
+    { path: '/about', icon: <FaInfoCircle />, label: t('nav.about') },
+    { path: '/contact', icon: <FaAddressBook />, label: t('nav.contact') },
+  ];
+
+  // Languages with flags
   const languages = [
     { code: 'fa', name: 'دری', flag: '🇦🇫' },
     { code: 'ps', name: 'پشتو', flag: '🇦🇫' },
     { code: 'en', name: 'English', flag: '🇺🇸' }
   ];
 
-
-  // زبان فعلی
+  // Current language
   const currentLang = languages.find(lang => lang.code === i18n.language) || languages[0];
 
-  // تغییر زبان
+  // Change language
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     document.documentElement.dir = lng === 'fa' || lng === 'ps' ? 'rtl' : 'ltr';
     setIsLangMenuOpen(false);
   };
 
-  // تشخیص اسکرول برای تغییر ظاهر هیدر
+  // Detect scroll for header appearance
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      
-      // بستن محتوای پنهان هنگام اسکرول
-      if (window.scrollY > 100) {
-        setIsHiddenContentOpen(false);
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // بستن منوها هنگام تغییر مسیر
+  // Set active link based on current path
+  useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location]);
+
+  // Close menus when route changes
   useEffect(() => {
     setIsMenuOpen(false);
     setIsLangMenuOpen(false);
-  }, []);
+  }, [location]);
+
+  // Handle link click with animation
+  const handleLinkClick = (path) => {
+    setActiveLink(path);
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
-      {/* هدر اصلی */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      {/* Main Header */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-gradient-to-r from-blue-800 to-indigo-900 shadow-lg py-2' 
+          ? 'bg-gradient-to-r from-blue-800 to-indigo-900 shadow-lg py-2 backdrop-blur-sm bg-opacity-90' 
           : 'bg-gradient-to-r from-blue-900 to-indigo-800 py-4'
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            {/* لوگو */}
-            <Link to="/" className="flex items-center">
-              <div className="text-2xl font-bold text-white hover:text-blue-300 transition-colors">
+            {/* Logo */}
+            <Link to="/" className="flex items-center group">
+              <div className="text-2xl font-bold text-white group-hover:text-blue-300 transition-all duration-300 transform group-hover:scale-105">
                 گچکاری صداقت
               </div>
             </Link>
             
-            {/* منوی دسکتاپ */}
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              {/* لینک‌های ناوبری */}
-              <ul className="flex space-x-6">
-                <li>
-                  <Link 
-                    to="/" 
-                    className="text-white hover:text-blue-300 transition-colors font-medium flex items-center"
-                  >
-                    {t('nav.home')}
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/portfolio" 
-                    className="text-white hover:text-blue-300 transition-colors font-medium flex items-center"
-                  >
-                    {t('nav.portfolio')}
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/services" 
-                    className="text-white hover:text-blue-300 transition-colors font-medium flex items-center"
-                  >
-                    {t('nav.services')}
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/about" 
-                    className="text-white hover:text-blue-300 transition-colors font-medium flex items-center"
-                  >
-                    {t('nav.about')}
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/contact" 
-                    className="text-white hover:text-blue-300 transition-colors font-medium flex items-center"
-                  >
-                    {t('nav.contact')}
-                  </Link>
-                </li>
+              <ul className="flex space-x-2">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link 
+                      to={item.path}
+                      onClick={() => handleLinkClick(item.path)}
+                      className={`relative px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
+                        activeLink === item.path 
+                          ? 'text-blue-300 bg-blue-900 bg-opacity-50' 
+                          : 'text-white hover:text-blue-300'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {activeLink === item.path && (
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 rounded-full animate-pulse"></span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
               </ul>
               
-              {/* منوی کشویی زبان */}
+              {/* Language Dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                  className="flex items-center space-x-2 bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  <span>{currentLang.flag}</span>
+                  <span className="text-xl">{currentLang.flag}</span>
                   <span>{currentLang.name}</span>
-                  <FaChevronDown className={`text-sm transition-transform ${isLangMenuOpen ? 'rotate-180' : ''}`} />
+                  <FaChevronDown className={`text-sm transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {isLangMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-blue-700 rounded-lg shadow-lg z-10 overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-48 bg-blue-700 rounded-lg shadow-xl z-10 overflow-hidden transition-all duration-300 transform origin-top-right">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full text-left px-4 py-3 hover:bg-blue-600 transition-colors flex items-center space-x-2 text-white ${
-                          lang.code === i18n.language ? 'bg-blue-600' : ''
+                        className={`w-full text-left px-4 py-3 hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 text-white ${
+                          lang.code === i18n.language ? 'bg-blue-600 font-medium' : ''
                         }`}
                       >
-                        <span>{lang.flag}</span>
+                        <span className="text-xl">{lang.flag}</span>
                         <span>{lang.name}</span>
                       </button>
                     ))}
@@ -155,9 +147,9 @@ function Header() {
               </div>
             </nav>
             
-            {/* دکمه منوی موبایل */}
+            {/* Mobile Menu Button */}
             <button 
-              className="md:hidden text-white focus:outline-none z-10 relative"
+              className="md:hidden text-white focus:outline-none z-10 relative transition-transform duration-300 hover:scale-110"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="منوی موبایل"
             >
@@ -167,130 +159,73 @@ function Header() {
         </div>
       </header>
       
-      {/* محتوای پنهان زیر هیدر */}
-      <div className={`fixed top-16 left-0 right-0 z-40 bg-gradient-to-r from-blue-800 to-indigo-900 text-white transition-all duration-300 overflow-hidden ${
-        isHiddenContentOpen ? 'h-48' : 'h-0'
-      }`}>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-xl font-bold mb-2">خدمات تخصصی گچ کاری و ساختمان</h2>
-              <p className="text-blue-200">با بیش از 15 سال سابقه درخشان در صنعت ساختمان</p>
-            </div>
-            <button 
-              onClick={() => setIsHiddenContentOpen(!isHiddenContentOpen)}
-              className="text-white hover:text-blue-300 transition-colors z-10"
-            >
-              {isHiddenContentOpen ? <FaTimes size={20} /> : <FaArrowUp size={20} />}
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      {/* منوی موبایل */}
+      {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-30 bg-black bg-opacity-50 md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden transition-opacity duration-300 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
       >
         <div 
-          className={`fixed top-0 right-0 h-full w-64 bg-blue-900 shadow-xl transform transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 h-full w-64 bg-blue-900 shadow-xl transform transition-transform duration-500 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-6">
-            {/* دکمه بستن منو */}
+            {/* Close Button */}
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-xl font-bold text-white">منو</h2>
               <button 
                 onClick={() => setIsMenuOpen(false)}
-                className="text-white hover:text-blue-300 transition-colors"
+                className="text-white hover:text-blue-300 transition-colors duration-300 transform hover:rotate-90"
               >
                 <FaTimes size={24} />
               </button>
             </div>
             
-            {/* لینک‌های ناوبری */}
+            {/* Navigation Links */}
             <nav>
-              <ul className="space-y-4">
-                <li>
-                  <Link 
-                    to="/" 
-                    className="flex items-center py-3 px-4 text-white hover:bg-blue-800 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaHome className="ml-3 text-xl" />
-                    <span className="text-lg">{t('nav.home')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/portfolio" 
-                    className="flex items-center py-3 px-4 text-white hover:bg-blue-800 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaProjectDiagram className="ml-3 text-xl" />
-                    <span className="text-lg">{t('nav.portfolio')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/services" 
-                    className="flex items-center py-3 px-4 text-white hover:bg-blue-800 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaInfoCircle className="ml-3 text-xl" />
-                    <span className="text-lg">{t('nav.services')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/about" 
-                    className="flex items-center py-3 px-4 text-white hover:bg-blue-800 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaInfoCircle className="ml-3 text-xl" />
-                    <span className="text-lg">{t('nav.about')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/contact" 
-                    className="flex items-center py-3 px-4 text-white hover:bg-blue-800 rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaAddressBook className="ml-3 text-xl" />
-                    <span className="text-lg">{t('nav.contact')}</span>
-                  </Link>
-                </li>
+              <ul className="space-y-2">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link 
+                      to={item.path}
+                      onClick={() => handleLinkClick(item.path)}
+                      className={`flex items-center py-3 px-4 rounded-lg transition-all duration-300 ${
+                        activeLink === item.path 
+                          ? 'bg-blue-800 text-blue-200 border-l-4 border-blue-300' 
+                          : 'text-white hover:bg-blue-800'
+                      }`}
+                    >
+                      <span className="ml-3 text-xl">{item.icon}</span>
+                      <span className="text-lg">{item.label}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
               
-              {/* جداکننده */}
-              <div className="border-t border-blue-800 my-6"></div>
-              
-              {/* منوی کشویی زبان */}
-              <div>
+              {/* Language Selector */}
+              <div className="mt-8">
                 <button
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                  className="flex items-center justify-between w-full py-3 px-4 bg-blue-800 hover:bg-blue-700 rounded-lg transition-colors text-white"
+                  className="flex items-center justify-between w-full py-3 px-4 bg-blue-800 hover:bg-blue-700 rounded-lg transition-all duration-300 text-white"
                 >
                   <div className="flex items-center space-x-2">
                     <span className="text-xl">{currentLang.flag}</span>
                     <span className="text-lg">{currentLang.name}</span>
                   </div>
-                  <FaChevronDown className={`text-sm transition-transform ${isLangMenuOpen ? 'rotate-180' : ''}`} />
+                  <FaChevronDown className={`text-sm transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {isLangMenuOpen && (
-                  <div className="mt-2 bg-blue-800 rounded-lg overflow-hidden">
+                  <div className="mt-2 bg-blue-800 rounded-lg overflow-hidden transition-all duration-300">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full text-left px-4 py-3 hover:bg-blue-700 transition-colors flex items-center space-x-2 text-white ${
-                          lang.code === i18n.language ? 'bg-blue-700' : ''
+                        className={`w-full text-left px-4 py-3 hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2 text-white ${
+                          lang.code === i18n.language ? 'bg-blue-700 font-medium' : ''
                         }`}
                       >
                         <span className="text-xl">{lang.flag}</span>
