@@ -175,7 +175,7 @@ function Home() {
               <FaTelegram className="text-2xl ml-3" />
               <div>
                 <div className="font-semibold">تلگرام</div>
-                <div className="text-sm opacity-90">@SadaqatGroup</div>
+                <div className="text-sm opacity-90">@SadaqatGaj</div>
               </div>
             </a>
           </div>
