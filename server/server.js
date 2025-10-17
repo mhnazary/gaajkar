@@ -2,10 +2,13 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const infoRoutes = require('./routes/info');
-const contactRoutes = require('./routes/contact');
-const authRoutes = require('./routes/auth'); // اضافه شده
-const projectRoutes = require('./routes/projects');
+const path = require('path');
+
+// استفاده از مسیرهای مطلق برای جلو از خطا
+const infoRoutes = require(path.resolve(__dirname, './routes/info'));
+const contactRoutes = require(path.resolve(__dirname, './routes/contact'));
+const authRoutes = require(path.resolve(__dirname, './routes/auth'));
+const projectRoutes = require(path.resolve(__dirname, './routes/projects'));
 
 dotenv.config();
 const app = express();
@@ -21,11 +24,10 @@ app.use(express.json());
 // مسیرهای API
 app.use('/api/info', infoRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/auth', authRoutes); // اضافه شده
+app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 
 app.get('/', (req, res) => res.send('Gaj Brothers API Running'));
-// اضافه کردن این مسیر برای تست
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
