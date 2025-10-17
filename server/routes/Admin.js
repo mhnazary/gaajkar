@@ -13,20 +13,12 @@ const AdminSchema = new mongoose.Schema({
   }
 });
 
-// قبل از ذخیره، رمز عبور را هش کن (فقط اگر تغییر کرده باشد)
 AdminSchema.pre('save', async function(next) {
-  // اگر رمز عبور تغییر نکرده است، هش نکن
   if (!this.isModified('password')) {
-    return next();
-  }
-  
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
     next();
-  } catch (error) {
-    next(error);
   }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 module.exports = mongoose.model('Admin', AdminSchema);
