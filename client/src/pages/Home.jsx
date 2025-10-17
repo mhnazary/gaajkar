@@ -72,7 +72,7 @@ function Home() {
               به عنوان یکی از معتبرترین شرکت‌ها در صنعت ساختمان شناخته می‌شود. ما با بهره‌گیری از 
               تیمی مجرب و استفاده از مواد اولیه باکیفیت، پروژه‌های متعددی را با موفقیت به پایان رسانده‌ایم.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-12 justify-items-center">
               <div className="text-center">
                 <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl">15+</span>
@@ -143,7 +143,7 @@ function Home() {
           
           <div className="flex flex-wrap justify-center gap-6">
             <a 
-              href="https://wa.me/1234567890" 
+              href="https://wa.me/0779975529" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center bg-green-600 hover:bg-green-700 px-6 py-4 rounded-lg transition-colors"
@@ -151,18 +151,18 @@ function Home() {
               <FaWhatsapp className="text-2xl ml-3" />
               <div>
                 <div className="font-semibold">واتساپ</div>
-                <div className="text-sm opacity-90">09123456789</div>
+                <div className="text-sm opacity-90">0773545264</div>
               </div>
             </a>
             
             <a 
-              href="tel:+989123456789" 
+              href="tel:+98773545264" 
               className="flex items-center bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-lg transition-colors"
             >
               <FaPhone className="text-2xl ml-3" />
               <div>
                 <div className="font-semibold">تماس تلفنی</div>
-                <div className="text-sm opacity-90">021-12345678</div>
+                <div className="text-sm opacity-90">077-3545264</div>
               </div>
             </a>
             
@@ -175,7 +175,7 @@ function Home() {
               <FaTelegram className="text-2xl ml-3" />
               <div>
                 <div className="font-semibold">تلگرام</div>
-                <div className="text-sm opacity-90">@gajbrothers</div>
+                <div className="text-sm opacity-90">@SadaqatGroup</div>
               </div>
             </a>
           </div>
