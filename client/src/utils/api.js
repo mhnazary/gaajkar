@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // با توجه به تنظیمات Vite proxy
+  baseURL: '/api', // این مسیر باید با /api شروع شود
   headers: {
     'Content-Type': 'application/json',
   },

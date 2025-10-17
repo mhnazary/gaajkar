@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# تنظیمات redirect برای API
+[[redirects]]
+  from = "/api/*"
+  to = "https://gaajkar.onrender.com/api/:splat"
+  status = 200
+
+# تنظیمات redirect برای مسیرهای دیگر (SPA)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -17,11 +17,11 @@ function Home() {
         
         // دریافت اطلاعات صفحه اصلی
         const currentLang = i18n.language || 'fa';
-        const homeResponse = await api.get(`/info/home/${currentLang}`);
+        const homeResponse = await api.get(`info/home/${currentLang}`);
         setHomeInfo(homeResponse.data);
         
         // دریافت پروژه‌های ویژه
-        const projectsResponse = await api.get('/projects/featured');
+        const projectsResponse = await api.get('projects/featured');
         setFeaturedProjects(projectsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);

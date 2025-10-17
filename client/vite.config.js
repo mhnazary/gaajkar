@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [react(),tailwindcss(),],
+  plugins: [react(), tailwindcss()],
   server: {
     port: 3000,
     proxy: {
@@ -13,7 +13,11 @@ export default defineConfig({
       },
     },
   },
-  css: {
-    postcss: './postcss.config.js',
-  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 })

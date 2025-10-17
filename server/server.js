@@ -1,3 +1,5 @@
+// server.js
+
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -18,7 +20,11 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: ['https://your-netlify-site.netlify.app', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 // مسیرهای API
@@ -27,6 +33,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 
+// مسیر اصلی برای تست
 app.get('/', (req, res) => res.send('Gaj Brothers API Running'));
 
 const PORT = process.env.PORT || 5000;
