@@ -161,7 +161,7 @@ function Home() {
             </a>
             
             <a 
-              href="tel:+98773545264" 
+              href="tel:+93773545264" 
               className="flex items-center bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-lg transition-colors"
             >
               <FaPhone className="text-2xl ml-3" />
