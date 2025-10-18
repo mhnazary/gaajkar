@@ -21,8 +21,8 @@ function Services() {
   // eslint-disable-next-line no-unused-vars
   const { i18n, t } = useTranslation();
   const [servicesInfo, setServicesInfo] = useState({ 
-    title: 'خدمات ما', 
-    description: 'خدمات تخصصی ما در زمینه گچ کاری و ساختمان' 
+    title: t('services.title'), 
+    description: t('services.description') 
   });
   const [loading, setLoading] = useState(true);
 
@@ -36,8 +36,8 @@ function Services() {
         console.error('Error fetching services info:', error);
         // اگر اطلاعات از سرور دریافت نشد، از مقادیر پیش‌فرض استفاده کن
         setServicesInfo({ 
-          title: 'خدمات ما', 
-          description: 'خدمات تخصصی ما در زمینه گچ کاری و ساختمان' 
+          title: t('services.title'), 
+          description: t('services.description') 
         });
       } finally {
         setLoading(false);
@@ -45,69 +45,69 @@ function Services() {
     };
 
     fetchServicesInfo();
-  }, [i18n.language]);
+  }, [i18n.language, t]);
 
   const services = [
     {
       icon: <FaPaintRoller className="text-3xl" />,
-      title: 'گچ‌کاری سنتی و مدرن',
-      description: 'انواع گچ کاری دیواری، سقفی و تزئینی با بهترین مواد و روش‌های روز دنیا',
-      image: 'https://images.unsplash.com/photo-1556912167-f6635cbdb542?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80'
+      title: t('services.traditionalPlastering'),
+      description: t('services.traditionalPlasteringDesc'),
+      image: 'https://i.postimg.cc/vTpJXVYN/2018-10.jpg'
     },
     {
       icon: <FaMagic className="text-3xl" />,
-      title: 'گچ‌بری و تزئینات داخلی',
-      description: 'طراحی و اجرای گچ‌بری‌های زیبا و مدرن برای فضاهای داخلی',
-      image: 'https://images.unsplash.com/photo-1600585154340-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+      title: t('services.decorativePlastering'),
+      description: t('services.decorativePlasteringDesc'),
+      image: 'https://i.postimg.cc/h49NqfGR/FB-IMG-1711471141142.jpg'
     },
     {
       icon: <FaLightbulb className="text-3xl" />,
-      title: 'سقف کاذب و طراحی نورپردازی',
-      description: 'طراحی و اجرای سقف‌های کاذب مدرن با نورپردازی‌های خلاقانه',
-      image: 'https://images.unsplash.com/photo-1616594040136-4a9e3e2d6c9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80'
+      title: t('services.falseCeiling'),
+      description: t('services.falseCeilingDesc'),
+      image: 'https://i.postimg.cc/90JpQ3SM/1756222964884.jpg'
     },
     {
       icon: <FaHammer className="text-3xl" />,
-      title: 'ترمیم و بازسازی دیوارها',
-      description: 'ترمیم و بازسازی دیوارهای قدیمی و آسیب‌دیده با بهترین مواد',
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80'
+      title: t('services.wallRenovation'),
+      description: t('services.wallRenovationDesc'),
+      image: 'https://i.postimg.cc/QNbSb5Mn/images-22-jpeg.jpg'
     },
     {
       icon: <FaBrush className="text-3xl" />,
-      title: 'رنگ و نقاشی دیواری',
-      description: 'انواع رنگ‌آمیزی دیواری با رنگ‌های باکیفیت و متنوع',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1768&q=80'
+      title: t('services.painting'),
+      description: t('services.paintingDesc'),
+      image: 'https://i.postimg.cc/Y2383g9G/1756226837771.jpg'
     },
     {
       icon: <FaTools className="text-3xl" />,
-      title: 'خدمات تکمیلی ساختمانی',
-      description: 'انواع خدمات ساختمانی از جمله کف‌سازی، نما و...',
-      image: 'https://images.unsplash.com/photo-1600585154340-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+      title: t('services.additionalServices'),
+      description: t('services.additionalServicesDesc'),
+      image: 'https://i.postimg.cc/Pf4K4Zxj/photo-1024x768.jpg'
     }
   ];
 
   const features = [
     {
       icon: <FaStar className="text-2xl" />,
-      title: 'کیفیت برتر',
-      description: 'استفاده از مواد اولیه باکیفیت و رعایت استانداردهای بین‌المللی'
+      title: t('services.quality'),
+      description: t('services.qualityDesc')
     },
     {
       icon: <FaCheckCircle className="text-2xl" />,
-      title: 'دقت در اجرا',
-      description: 'توجه به جزئیات و اجرای دقیق پروژه‌ها مطابق با نقشه‌های فنی'
+      title: t('services.precision'),
+      description: t('services.precisionDesc')
     },
     {
       icon: <FaUsers className="text-2xl" />,
-      title: 'رضایت مشتری',
-      description: 'تعهد به رضایت کامل مشتری و ارائه پشتیبانی پس از تحویل پروژه'
+      title: t('services.customerSatisfaction'),
+      description: t('services.customerSatisfactionDesc')
     }
   ];
 
   if (loading) {
     return (
       <div className="container mx-auto p-4 flex justify-center items-center h-64">
-        <div className="text-xl">در حال بارگذاری...</div>
+        <div className="text-xl">{t('services.loading', 'در حال بارگذاری...')}</div>
       </div>
     );
   }
@@ -117,8 +117,7 @@ function Services() {
       {/* هدر صفحه */}
       <div className="text-center mb-16">
         <h1 className="text-4xl font-bold mb-4">{servicesInfo.title}</h1>
-        <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto">{servicesInfo.description}</p>
+        <p className="text-lg text-gray-700 max-w-3xl mx-auto md:mt-10">{servicesInfo.description}</p>
       </div>
       
       {/* بخش خدمات */}
@@ -141,9 +140,6 @@ function Services() {
             <div className="p-6">
               <h3 className="text-xl font-bold mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-4">{service.description}</p>
-              <button className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                اطلاعات بیشتر →
-              </button>
             </div>
           </div>
         ))}
@@ -151,7 +147,7 @@ function Services() {
       
       {/* بخش ویژگی‌ها */}
       <div className="mt-20 bg-gray-50 rounded-2xl p-8">
-        <h2 className="text-3xl font-bold text-center mb-12">چرا خدمات ما را انتخاب کنید؟</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">{t('services.whyChooseUs')}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
@@ -170,15 +166,15 @@ function Services() {
       
       {/* CTA Section */}
       <div className="mt-20 bg-blue-900 text-white rounded-2xl p-12 text-center">
-        <h2 className="text-3xl font-bold mb-4">آماده شروع پروژه بعدی شما هستیم</h2>
+        <h2 className="text-3xl font-bold mb-4">{t('services.readyToStart')}</h2>
         <p className="text-lg opacity-90 max-w-2xl mx-auto mb-8">
-          برای دریافت مشاوره رایگان و برآورد هزینه، همین حالا با ما تماس بگیرید
+          {t('services.readyToStartDesc')}
         </p>
         <a 
           href="/contact" 
           className="inline-block bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
         >
-          تماس با ما
+          {t('services.contactUs')}
         </a>
       </div>
     </div>

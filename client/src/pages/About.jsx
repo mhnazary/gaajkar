@@ -35,7 +35,7 @@ function About() {
   if (loading) {
     return (
       <div className="container mx-auto p-4 flex justify-center items-center h-64">
-        <div className="text-xl">در حال بارگذاری...</div>
+        <div className="text-xl">{t('about.loading', 'در حال بارگذاری...')}</div>
       </div>
     );
   }
@@ -44,55 +44,52 @@ function About() {
     <div className="container mx-auto p-4 ">
       <div className="max-w-6xl mx-auto">
         {/* سابقه کاری */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-16 mt-8 md:mt-16">
+        <div className="bg-white rounded-xl shadow-lg p-4 mb-16 mt-12 md:mt-16 lg:mt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl font-bold mb-6">سابقه درخشان</h2>
+              <h2 className="text-2xl font-bold mb-6">{t('about.brilliantHistory')}</h2>
               <p className="text-gray-700 mb-6">
-                شرکت گاج برادران در سال 1380 تاسیس شد و از آن زمان تاکنون، با
-                تکیه بر دانش فنی و تجربه، به عنوان یکی از پیشگامان در صنعت
-                ساختمان شناخته می‌شود. ما در پروژه‌های مسکونی، تجاری و اداری
-                فعالیت داشته و همواره رضایت مشتری را در اولویت قرار داده‌ایم.
+                {t('about.brilliantHistoryDesc')}
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="flex items-center">
-                  <div className="bg-blue-100 p-3 rounded-full mr-4">
+              <div className="grid grid-cols-2 gap-4 mt-8 p-8">
+                <div className="flex items-center ">
+                  <div className="bg-blue-100 p-3 rounded-full mx-4">
                     <FaBuilding className="text-blue-600 text-xl" />
                   </div>
                   <div>
-                    <div className="font-semibold">150+ پروژه</div>
-                    <div className="text-sm text-gray-600">موفقیت‌آمیز</div>
+                    <div className="font-semibold">150+ {t('about.successfulProjects', 'پروژه موفق')}</div>
+                    <div className="text-sm text-gray-600">{t('about.projectsDesc', 'پروژه‌های اتمام شده با رضایت مشتری')}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center">
-                  <div className="bg-green-100 p-3 rounded-full mr-4">
+                  <div className="bg-green-100 p-3 rounded-full mx-4">
                     <FaUsers className="text-green-600 text-xl" />
                   </div>
                   <div>
-                    <div className="font-semibold">5+ کارمند</div>
-                    <div className="text-sm text-gray-600">متخصص و مجرب</div>
+                    <div className="font-semibold">5+ {t('about.specialistTeam', 'تیم متخصص')}</div>
+                    <div className="text-sm text-gray-600">{t('about.teamDesc', 'کارکنان مجرب و متخصص')}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center">
-                  <div className="bg-yellow-100 p-3 rounded-full mr-4">
+                  <div className="bg-yellow-100 p-3 rounded-full mx-4">
                     <FaAward className="text-yellow-600 text-xl" />
                   </div>
                   <div>
-                    <div className="font-semibold">15+ سال</div>
-                    <div className="text-sm text-gray-600">سابقه کاری</div>
+                    <div className="font-semibold">15+ {t('about.experienceYears', 'سال تجربه')}</div>
+                    <div className="text-sm text-gray-600">{t('about.experienceDesc', 'سابقه درخشان در صنعت ساختمان')}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center">
-                  <div className="bg-purple-100 p-3 rounded-full mr-4">
+                  <div className="bg-purple-100 p-3 rounded-full mx-4">
                     <FaHandshake className="text-purple-600 text-xl" />
                   </div>
                   <div>
                     <div className="font-semibold">99%</div>
-                    <div className="text-sm text-gray-600">رضایت مشتری</div>
+                    <div className="text-sm text-gray-600">{t('about.customerSatisfaction', 'رضایت مشتری')}</div>
                   </div>
                 </div>
               </div>
@@ -111,7 +108,7 @@ function About() {
         {/* تیم استادکاران */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-12">
-            تیم استادکاران ما
+            {t('about.ourTeam')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -122,14 +119,14 @@ function About() {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">علی رضایی</h3>
-                <p className="text-gray-600 mb-3">مدیرعامل و بنیان‌گذار</p>
+                <h3 className="text-xl font-bold mb-2">{t('about.teamMember1Name')}</h3>
+                <p className="text-gray-600 mb-3">{t('about.teamMember1Position')}</p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                    20 سال تجربه
+                    {t('about.teamMember1Exp1')}
                   </span>
                   <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                    مدیریت پروژه
+                    {t('about.teamMember1Exp2')}
                   </span>
                 </div>
               </div>
@@ -142,14 +139,14 @@ function About() {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">زیبا حسینی</h3>
-                <p className="text-gray-600 mb-3">مدیر فنی</p>
+                <h3 className="text-xl font-bold mb-2">{t('about.teamMember2Name')}</h3>
+                <p className="text-gray-600 mb-3">{t('about.teamMember2Position')}</p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                    15 سال تجربه
+                    {t('about.teamMember2Exp1')}
                   </span>
                   <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                    نظارت کیفی
+                    {t('about.teamMember2Exp2')}
                   </span>
                 </div>
               </div>
@@ -162,14 +159,14 @@ function About() {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">سارا احمدی</h3>
-                <p className="text-gray-600 mb-3">مدیر مالی</p>
+                <h3 className="text-xl font-bold mb-2">{t('about.teamMember3Name')}</h3>
+                <p className="text-gray-600 mb-3">{t('about.teamMember3Position')}</p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                    10 سال تجربه
+                    {t('about.teamMember3Exp1')}
                   </span>
                   <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                    مالی و حسابداری
+                    {t('about.teamMember3Exp2')}
                   </span>
                 </div>
               </div>
@@ -180,7 +177,7 @@ function About() {
         {/* اهداف و ارزش‌ها */}
         <div className="bg-gray-50 rounded-xl p-8">
           <h2 className="text-3xl font-bold text-center mb-12">
-            اهداف و ارزش‌های ما
+            {t('about.goalsAndValues')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -189,10 +186,9 @@ function About() {
                 <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <FaAward className="text-blue-600 text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">کیفیت</h3>
+                <h3 className="text-xl font-semibold mb-3">{t('about.quality')}</h3>
                 <p className="text-gray-600">
-                  استفاده از بهترین مواد اولیه و رعایت استانداردهای بین‌المللی
-                  در تمام پروژه‌ها
+                  {t('about.qualityDesc')}
                 </p>
               </div>
             </div>
@@ -202,10 +198,9 @@ function About() {
                 <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <FaUsers className="text-green-600 text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">دقت</h3>
+                <h3 className="text-xl font-semibold mb-3">{t('about.precision')}</h3>
                 <p className="text-gray-600">
-                  توجه به جزئیات و اجرای دقیق پروژه‌ها مطابق با نقشه‌های فنی و
-                  خواست مشتری
+                  {t('about.precisionDesc')}
                 </p>
               </div>
             </div>
@@ -215,9 +210,9 @@ function About() {
                 <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <FaHandshake className="text-yellow-600 text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">رضایت مشتری</h3>
+                <h3 className="text-xl font-semibold mb-3">{t('about.customerSatisfaction')}</h3>
                 <p className="text-gray-600">
-                  تعهد به رضایت کامل مشتری و ارائه پشتیبانی پس از تحویل پروژه
+                  {t('about.customerSatisfactionDesc')}
                 </p>
               </div>
             </div>
@@ -227,7 +222,7 @@ function About() {
         {/* عکس‌های تیم در حال کار */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-center mb-8">
-            تیم ما در حال فعالیت
+            {t('about.teamInAction')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
